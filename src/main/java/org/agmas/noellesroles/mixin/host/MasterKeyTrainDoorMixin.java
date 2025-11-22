@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.agmas.noellesroles.ModItems;
 import org.agmas.noellesroles.Noellesroles;
-import org.agmas.noellesroles.RoleHelpers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;

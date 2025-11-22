@@ -4,9 +4,17 @@
   "package": "org.agmas.noellesroles.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "AnnounceWelcomeMixin",
-    "RoleTextMixin",
-    "morphling.MorphlingRendererMixin"
+    "CustomRolesRoleNameRendererMixin",
+    "InstinctMixin",
+    "killerfix.AllowKillerScreenMixin",
+    "killerfix.KillerClientMixin",
+    "killerfix.MoodRendererMixin",
+    "killerfix.ShowKillerRolesAsKillerOnEndMixin",
+    "morphling.MorphlingRendererMixin",
+    "morphling.MorphlingRoleNameRendererMixin",
+    "morphling.MorphlingScreenMixin",
+    "phantom.PhantomHudMixin",
+    "swapper.SwapperScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -15,8 +23,9 @@
     "requireAnnotations": true
   },
   "mixins": [
-    "InstinctMixin",
-    "morphling.MorphlingRoleNameRendererMixin",
-    "morphling.MorphlingScreenMixin"
+    "killerfix.CoinCounterMixin",
+    "killerfix.KillerInstinctMixin",
+    "killerfix.KillerMoodMixin",
+    "killerfix.KillerRevolverMixin"
   ]
 }

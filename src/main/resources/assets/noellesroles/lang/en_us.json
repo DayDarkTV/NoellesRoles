@@ -1,19 +1,36 @@
 {
-  "announcement.premise.noellesroles.jester": "Go psycho when shot by a gun.",
-  "announcement.goal.noellesroles.jester": "Find and co-operate with the Killers.",
-  "announcement.title.noellesroles.jester": "Jester",
+  "announcement.goals.jester": "Find and co-operate with the Killers.",
+  "announcement.role.jester": "Jester",
+  "announcement.win.jester": "Jesters Win!",
 
-  "announcement.premise.noellesroles.morphling": "Disguise into other passengers.",
-  "announcement.goal.noellesroles.morphling": "Fool everyone.",
-  "announcement.title.noellesroles.morphling": "Morphling",
+  "announcement.goals.morphling": "Fool everyone.",
+  "announcement.role.morphling": "Morphling",
+  "announcement.win.morphling": "Killers Win!",
 
-  "announcement.premise.noellesroles.awesome_binglus": "Awesome Binglu",
-  "announcement.goal.noellesroles.awesome_binglus": "Awesome Binglus",
-  "announcement.title.noellesroles.awesome_binglus": "Awesome Binglus",
+  "announcement.goals.awesome_binglus": "Awesome Binglu",
+  "announcement.role.awesome_binglus": "Awesome Binglus",
+  "announcement.win.awesome_binglus": "Passengers Win!",
 
-  "announcement.premise.noellesroles.host": "Use the master key to get around.",
-  "announcement.goal.noellesroles.host": "Open up every door on the train!",
-  "announcement.title.noellesroles.host": "Host",
+  "announcement.goals.host": "Use the master key to open up every door on the train!",
+  "announcement.role.host": "Host",
+  "announcement.win.host": "Passengers Win!",
+
+  "announcement.goals.bartender": "See players that drink through walls!",
+  "announcement.role.bartender": "Bartender",
+  "announcement.win.bartender": "Passengers Win!",
+
+  "announcement.goals.phantom": "Turn invisible; but watch out for collisions.",
+  "announcement.role.phantom": "Phantom",
+  "announcement.win.phantom": "Killers Win!",
+
+  "announcement.goals.noisemaker": "Alert players of your location upon death.",
+  "announcement.role.noisemaker": "Noisemaker",
+  "announcement.win.noisemaker": "Passengers Win!",
+
+  "announcement.goals.swapper": "Swap places with another player.",
+  "announcement.role.swapper": "Swapper",
+  "announcement.win.swapper": "Passengers Win!",
+
 
   "item.noellesroles.fake_revolver": "Fake Revolver",
   "item.noellesroles.fake_knife": "Fake Knife"

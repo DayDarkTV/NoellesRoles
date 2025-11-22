@@ -4,12 +4,17 @@
   "package": "org.agmas.noellesroles.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ModdedRoleNetworkMixin",
     "RoleAssignerMixin",
+    "WinConditionMixin",
+    "bartender.BartenderReseterMixin",
+    "bartender.CocktailItemMixin",
+    "host.MasterKeyDropMixin",
     "host.MasterKeySmallDoorMixin",
     "host.MasterKeyTrainDoorMixin",
     "jester.JesterItemEntityMixin",
-    "jester.JesterJestMixin"
+    "jester.JesterJestMixin",
+    "morphling.MorphlingReseterMixin",
+    "noisemaker.NoisemakerKillMixin"
   ],
   "injectors": {
     "defaultRequire": 1

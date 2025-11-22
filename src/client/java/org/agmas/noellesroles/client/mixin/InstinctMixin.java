@@ -1,7 +1,8 @@
 package org.agmas.noellesroles.client.mixin;
 
+import dev.doctor4t.trainmurdermystery.api.TMMRoles;
+import dev.doctor4t.trainmurdermystery.cca.GameWorldComponent;
 import dev.doctor4t.trainmurdermystery.client.TMMClient;
-import dev.doctor4t.trainmurdermystery.client.gui.RoleAnnouncementText;
 import dev.doctor4t.trainmurdermystery.client.gui.RoundTextRenderer;
 import dev.doctor4t.trainmurdermystery.game.GameFunctions;
 import dev.doctor4t.trainmurdermystery.util.AnnounceWelcomePayload;
@@ -11,7 +12,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.agmas.noellesroles.Noellesroles;
-import org.agmas.noellesroles.RoleHelpers;
+import org.agmas.noellesroles.bartender.BartenderPlayerComponent;
 import org.agmas.noellesroles.client.NoellesrolesClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,8 +31,9 @@ public abstract class InstinctMixin {
 
     @Inject(method = "isInstinctEnabled", at = @At("HEAD"), cancellable = true)
     private static void b(CallbackInfoReturnable<Boolean> cir) {
-        if (NoellesrolesClient.clientModdedRole != null) {
-            if (instinctKeybind.isPressed() && NoellesrolesClient.clientModdedRole.id.equals(Noellesroles.JESTER_ID)) {
+        GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+        if (gameWorldComponent.isRole(MinecraftClient.getInstance().player, Noellesroles.JESTER)) {
+            if (instinctKeybind.isPressed()) {
                 cir.setReturnValue(true);
                 cir.cancel();
             }
@@ -40,16 +42,27 @@ public abstract class InstinctMixin {
 
     @Inject(method = "getInstinctHighlight", at = @At("HEAD"), cancellable = true)
     private static void b(Entity target, CallbackInfoReturnable<Integer> cir) {
+        GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
         if (target instanceof PlayerEntity) {
-            if (NoellesrolesClient.clientModdedRole != null) {
-                if (NoellesrolesClient.clientModdedRole.id.equals(Noellesroles.JESTER_ID) && TMMClient.isPlayerAliveAndInSurvival() && TMMClient.isInstinctEnabled()) {
-                    cir.setReturnValue(Color.PINK.getRGB());
+            if (!((PlayerEntity)target).isSpectator()) {
+                BartenderPlayerComponent bartenderPlayerComponent = (BartenderPlayerComponent) BartenderPlayerComponent.KEY.get((PlayerEntity) target);
+                if (gameWorldComponent.isRole(MinecraftClient.getInstance().player, Noellesroles.BARTENDER) && bartenderPlayerComponent.glowTicks > 0) {
+                    cir.setReturnValue(Color.ORANGE.getRGB());
                 }
             }
-            if (GameFunctions.isPlayerSpectatingOrCreative(MinecraftClient.getInstance().player) && TMMClient.isInstinctEnabled()) {
-                if (RoleHelpers.instance.isOfAnyModdedRole((PlayerEntity) target)) {
-                    cir.setReturnValue(RoleHelpers.instance.getRoleOfPlayer((PlayerEntity) target).color);
-                    cir.cancel();
+        }
+        if (target instanceof PlayerEntity && TMMClient.isInstinctEnabled()) {
+            if (!((PlayerEntity)target).isSpectator()) {
+                if (gameWorldComponent.isRole(MinecraftClient.getInstance().player, Noellesroles.JESTER) && TMMClient.isPlayerAliveAndInSurvival()) {
+                    cir.setReturnValue(Color.PINK.getRGB());
+                }
+                if (GameFunctions.isPlayerSpectatingOrCreative(MinecraftClient.getInstance().player)) {
+                    TMMRoles.Role role = gameWorldComponent.getRole((PlayerEntity) target);
+                    if (role == null) {
+                        cir.setReturnValue(TMMRoles.CIVILIAN.color());
+                    } else {
+                        cir.setReturnValue(role.color());
+                    }
                 }
             }
         }

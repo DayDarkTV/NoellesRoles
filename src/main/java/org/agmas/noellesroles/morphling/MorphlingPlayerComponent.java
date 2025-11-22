@@ -76,7 +76,7 @@ public class MorphlingPlayerComponent implements AutoSyncedComponent, ServerTick
     }
 
     public void stopMorph() {
-        this.morphTicks = -GameConstants.getInTicks(1,0);
+        this.morphTicks = -GameConstants.getInTicks(0,20);
     }
 
     public int getMorphTicks() {

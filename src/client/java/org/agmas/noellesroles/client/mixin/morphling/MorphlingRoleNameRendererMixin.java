@@ -17,6 +17,10 @@ public abstract class MorphlingRoleNameRendererMixin {
 
     @Redirect(method = "renderHud", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getDisplayName()Lnet/minecraft/text/Text;"))
     private static Text b(PlayerEntity instance) {
+
+        if (instance.isInvisible()) {
+            return Text.literal("");
+        }
         if ((MorphlingPlayerComponent.KEY.get(instance)).getMorphTicks() > 0) {
             if (instance.getWorld().getPlayerByUuid(MorphlingPlayerComponent.KEY.get(instance).disguise) != null) {
                 return instance.getWorld().getPlayerByUuid((MorphlingPlayerComponent.KEY.get(instance)).disguise).getDisplayName();

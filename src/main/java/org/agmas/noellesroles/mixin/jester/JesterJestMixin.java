@@ -6,7 +6,6 @@ import dev.doctor4t.trainmurdermystery.game.GameConstants;
 import dev.doctor4t.trainmurdermystery.game.GameFunctions;
 import net.minecraft.entity.player.PlayerEntity;
 import org.agmas.noellesroles.Noellesroles;
-import org.agmas.noellesroles.RoleHelpers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,11 +18,12 @@ public abstract class JesterJestMixin {
     private static void jesterJest(PlayerEntity victim, boolean spawnBody, PlayerEntity killer, CallbackInfo ci) {
         if (killer != null) {
             GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(victim.getWorld());
-            if (RoleHelpers.instance.isPlayerOf(victim, Noellesroles.JESTER_ID) && !RoleHelpers.instance.isPlayerOf(killer, Noellesroles.JESTER_ID) && !gameWorldComponent.isKiller(killer)) {
+            if (gameWorldComponent.isRole(victim, Noellesroles.JESTER) && !gameWorldComponent.isRole(killer, Noellesroles.JESTER) && gameWorldComponent.isInnocent(killer)) {
                 PlayerPsychoComponent component = (PlayerPsychoComponent)PlayerPsychoComponent.KEY.get(victim);
                 if (component.getPsychoTicks() <= 0) {
                     component.startPsycho();
-                    component.psychoTicks = GameConstants.getInTicks(1, 0);
+                    component.psychoTicks = GameConstants.getInTicks(0, 45);
+                    component.armour = 0;
                     ci.cancel();
                 }
             }

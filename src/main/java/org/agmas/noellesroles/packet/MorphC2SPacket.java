@@ -10,8 +10,8 @@ import org.agmas.noellesroles.Noellesroles;
 import java.util.UUID;
 
 public record MorphC2SPacket(UUID player) implements CustomPayload {
-    public static final Identifier HOLO_MODE_PAYLOAD_ID = Identifier.of(Noellesroles.MOD_ID, "morph");
-    public static final CustomPayload.Id<MorphC2SPacket> ID = new CustomPayload.Id<>(HOLO_MODE_PAYLOAD_ID);
+    public static final Identifier MORPH_PAYLOAD_ID = Identifier.of(Noellesroles.MOD_ID, "morph");
+    public static final CustomPayload.Id<MorphC2SPacket> ID = new CustomPayload.Id<>(MORPH_PAYLOAD_ID);
     public static final PacketCodec<RegistryByteBuf, MorphC2SPacket> CODEC;
 
     public MorphC2SPacket(UUID player) {
